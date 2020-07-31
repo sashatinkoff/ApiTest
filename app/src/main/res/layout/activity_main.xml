@@ -4,6 +4,7 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
+        android:background="@color/bgColor"
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -15,8 +16,8 @@
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:menu="@menu/main"
-                app:title="@string/label_activity_main" />
+                app:logo="@drawable/ic_logo"
+                app:menu="@menu/main" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

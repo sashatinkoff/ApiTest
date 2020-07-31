@@ -11,7 +11,7 @@ android {
     buildToolsVersion config.buildToolVersion
 
     defaultConfig {
-        applicationId "com.isidroid.app"
+        applicationId "com.isidroid.howbot"
         minSdkVersion config.minSdk
         targetSdkVersion config.targetSdk
 

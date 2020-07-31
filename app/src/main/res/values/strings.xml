@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RestApiApp</string>
+    <string name="app_name">HowBot</string>
     <string name="label_activity_main">Стена постов</string>
     <string name="sort_popular">Популярное</string>
     <string name="sort_created_at">Свежее</string>

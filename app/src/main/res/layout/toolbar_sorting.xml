@@ -2,10 +2,12 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/textView"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_margin="4dp"
     android:drawableEnd="@drawable/ic_shevron_down"
+    android:gravity="center_vertical"
     android:text="@string/sort_created_at"
-    android:textColor="@color/white">
+    android:textColor="@color/white"
+    android:textSize="16sp">
 
 </TextView>
