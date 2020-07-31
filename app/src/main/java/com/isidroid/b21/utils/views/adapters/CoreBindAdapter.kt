@@ -10,6 +10,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.isidroid.b21.R
+import timber.log.Timber
 
 abstract class CoreBindAdapter<T> : RecyclerView.Adapter<CoreHolder>() {
     private var loadMoreCallback: (() -> Unit)? = null
@@ -168,8 +169,6 @@ abstract class CoreBindAdapter<T> : RecyclerView.Adapter<CoreHolder>() {
 
         onReset()
         notifyDataSetChanged()
-
-        loadMore()
     }
 
     // Open and abstract functions
@@ -206,24 +205,6 @@ abstract class CoreBindAdapter<T> : RecyclerView.Adapter<CoreHolder>() {
         override fun onBind(item: String) {}
     }
 
-    class DiffCallback<T>(
-        private val itemsBefore: List<T>,
-        private val itemsAfter: List<T>
-    ) : DiffUtil.Callback() {
-
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return try {
-                itemsBefore[oldItemPosition] != itemsAfter[oldItemPosition]
-            } catch (e: Exception) {
-                false
-            }
-        }
-
-        override fun getOldListSize() = itemsBefore.size
-        override fun getNewListSize() = itemsAfter.size
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
-            areItemsTheSame(oldItemPosition, newItemPosition)
-    }
 }
 
 abstract class CoreHolder(v: View) : RecyclerView.ViewHolder(v)

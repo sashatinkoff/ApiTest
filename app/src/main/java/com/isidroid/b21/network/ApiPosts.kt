@@ -18,6 +18,6 @@ interface ApiPosts {
     fun posts(
         @Query("first") first: Int = 20,
         @Query("after") after: String? = null,
-        @Query("orderBy") orderBy: String? = null
+        @Query("orderBy") orderBy: String = SortOptions.CREATED_AT.api
     ): Single<PostsResponse>
 }

@@ -9,8 +9,12 @@ import javax.inject.Inject
 class PostsInteractor @Inject constructor(private val apiPosts: ApiPosts) : BaseInteractor(),
     IPostsUseCase {
 
-    override fun load(cursorNext: String?, callbackUseCase: IPostsUseCase.Callback) {
-        disposable = apiPosts.posts(after = cursorNext)
+    override fun load(
+        cursorNext: String?,
+        sort: ApiPosts.SortOptions,
+        callbackUseCase: IPostsUseCase.Callback
+    ) {
+        disposable = apiPosts.posts(after = cursorNext, orderBy = sort.api)
             .map {
                 PostsDto(
                     posts = PostRepository.toPosts(it),

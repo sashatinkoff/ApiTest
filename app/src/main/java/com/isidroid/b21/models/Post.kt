@@ -1,5 +1,6 @@
 package com.isidroid.b21.models
 
+import java.io.Serializable
 import java.util.Date
 
 data class Post(
@@ -7,10 +8,7 @@ data class Post(
     val createdAt: Date,
     val user: User? = null,
     private val _status: String
-) {
-    enum class Status(val api: String) {
-        Published("PUBLISHED")
-    }
+) : Serializable {
 
     var images: List<Image>? = null
     var text: String? = null
@@ -19,5 +17,4 @@ data class Post(
     var views = 0
     var shares = 0
 
-    val status = Status.values().firstOrNull { it.api == _status }
 }
