@@ -10,10 +10,13 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.isidroid.b21.R
+import com.isidroid.b21.databinding.ItemEmptyBinding
+import com.isidroid.b21.databinding.ItemEmptyBindingImpl
 import timber.log.Timber
 
 abstract class CoreBindAdapter<T> : RecyclerView.Adapter<CoreHolder>() {
     private var loadMoreCallback: (() -> Unit)? = null
+    private var errorMessage: String? = null
     protected var hasMore = false
     protected open var hasEmpty = false
     protected open val loadingResource: Int = R.layout.item_loading
@@ -90,8 +93,7 @@ abstract class CoreBindAdapter<T> : RecyclerView.Adapter<CoreHolder>() {
         val viewtype = getItemViewType(position)
         when (viewtype) {
             VIEW_TYPE_LOADING -> updateLoadingViewHolder(holder as CoreLoadingHolder, position)
-            VIEW_TYPE_EMPTY -> {
-            }
+            VIEW_TYPE_EMPTY -> updateEmptyViewHolder(holder as CoreEmptyHolder)
             else -> updateViewHolder(holder, position)
         }
 
@@ -101,6 +103,10 @@ abstract class CoreBindAdapter<T> : RecyclerView.Adapter<CoreHolder>() {
     private fun updateLoadingViewHolder(holder: CoreLoadingHolder, position: Int) {
         holder.bind(position)
         loadMore()
+    }
+
+    private fun updateEmptyViewHolder(holder: CoreEmptyHolder) {
+        (holder.binding as? ItemEmptyBinding)?.textView?.text = errorMessage.orEmpty()
     }
 
     private fun updateViewHolder(holder: CoreHolder, position: Int) {
@@ -169,6 +175,15 @@ abstract class CoreBindAdapter<T> : RecyclerView.Adapter<CoreHolder>() {
 
         onReset()
         notifyDataSetChanged()
+    }
+
+    fun error(message: String?) {
+        hasEmpty = true
+        isInserted = true
+        this.errorMessage = message
+        notifyDataSetChanged()
+
+        Timber.i("sdfsdfsdf error=$message, itemCount=$itemCount")
     }
 
     // Open and abstract functions

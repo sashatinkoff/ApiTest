@@ -90,6 +90,6 @@ class MainActivity : BindActivity(layoutRes = R.layout.activity_main), IMainView
 
     override fun onError(t: Throwable) {
         swipeLayout.isRefreshing = false
-        Toast.makeText(this, t.message, Toast.LENGTH_LONG).show()
+        adapter.error(t.message)
     }
 }
